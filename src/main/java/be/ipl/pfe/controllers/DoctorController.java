@@ -21,7 +21,7 @@ public class DoctorController {
 	private DoctorService doctorService;
 
 	@GetMapping("/")
-	public List<Doctor> index() {
+	public List<Doctor> getAll() {
 		return this.doctorService.getAll();
 	}
 
