@@ -75,4 +75,8 @@ public class Doctor {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "Doctor{" + "id='" + this.id + '\'' + ", firstName='" + this.firstName + '\'' + ", lastName='" + this.lastName + '\'' + ", username='" + this.username + '\'' + ", password='" + this.password + '\'' + '}';
+	}
 }
