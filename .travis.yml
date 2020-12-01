@@ -8,10 +8,7 @@ jdk:
 before_install:
   - chmod +x mvnw
 
-deploy:
-  provider: heroku
-  api-key:
-    secure: "9a22e432-0bc3-46ff-b586-a98da6e45f3a"
-  
+install: true
 script:
   - echo "scripts launched"
+  - ./mvnw clean install
