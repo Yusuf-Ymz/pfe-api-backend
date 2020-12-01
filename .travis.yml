@@ -12,4 +12,4 @@ install: true
 
 script:
   - echo "scripts launched"
-  - mvn install
+  - mvn -B package --file pom.xml
