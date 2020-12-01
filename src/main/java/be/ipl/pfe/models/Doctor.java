@@ -1,6 +1,10 @@
 package be.ipl.pfe.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Setter;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.Column;
@@ -11,72 +15,82 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "doctors")
+@Data
 public class Doctor {
+    @Id
+    @Setter(value=AccessLevel.NONE)
+    private String id;
 
-	@Id
-	private String id;
-	@Column(name = "first_name", nullable = false)
-	private String firstName;
-	@Column(name = "last_name", nullable = false)
-	private String lastName;
-	@Column(name = "username", nullable = false)
-	private String username;
-	@JsonIgnore
-	@Column(name = "password", nullable = false)
-	private String password;
+    @JsonProperty(required = true, value = "first_name")
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-	public Doctor() {}
+    @JsonProperty(required = true, value = "last_name")
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
-	public Doctor(String username, String password, String firstName, String lastName) {
-		this.id = UUID.randomUUID().toString();
-		this.username = username;
-		this.password = BCrypt.hashpw(password, BCrypt.gensalt(10));
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
+    @JsonProperty(required = true)
+    @Column(name = "username", nullable = false)
+    private String username;
 
-	public boolean checkPassword(String password) {
-		return BCrypt.checkpw(password, this.password);
-	}
+    @JsonProperty(required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @Column(name = "password", nullable = false)
+    private String password;
 
-	public String getId() {
-		return this.id;
-	}
+    public Doctor() {
+    }
 
-	public String getFirstName() {
-		return this.firstName;
-	}
+    @JsonCreator
+    public Doctor(String username, String password, String firstName, String lastName) {
+        this.id = UUID.randomUUID().toString();
+        this.username = username;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt(10));
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public boolean checkPassword(String password) {
+        return BCrypt.checkpw(password, this.password);
+    }
 
-	public String getLastName() {
-		return this.lastName;
-	}
+    public String getId() {
+        return this.id;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getFirstName() {
+        return this.firstName;
+    }
 
-	public String getUsername() {
-		return this.username;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getLastName() {
+        return this.lastName;
+    }
 
-	public String getPassword() {
-		return this.password;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getUsername() {
+        return this.username;
+    }
 
-	@Override
-	public String toString() {
-		return "Doctor{" + "id='" + this.id + '\'' + ", firstName='" + this.firstName + '\'' + ", lastName='" + this.lastName + '\'' + ", username='" + this.username + '\'' + ", password='" + this.password + '\'' + '}';
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Doctor{" + "id='" + this.id + '\'' + ", firstName='" + this.firstName + '\'' + ", lastName='" + this.lastName + '\'' + ", username='" + this.username + '\'' + ", password='" + this.password + '\'' + '}';
+    }
 }
