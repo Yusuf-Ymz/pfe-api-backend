@@ -22,7 +22,7 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 
-	@GetMapping("/")
+	@GetMapping()
 	public List<Doctor> getAll() {
 		return this.doctorService.getAll();
 	}
@@ -40,6 +40,7 @@ public class DoctorController {
 	public String login(@RequestBody Map<String, String> body) {
 		String username = body.getOrDefault("username", "");
 		String password = body.getOrDefault("password", "");
+
 		if (username.isBlank()) throw new InvalidParameterException("username", "a non empty string");
 		if (password.isBlank()) throw new InvalidParameterException("password", "a non empty string");
 		Doctor doctor = this.doctorService.login(username, password);
