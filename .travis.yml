@@ -2,5 +2,5 @@ language: java
 jdk:
   - orcalejdk11 
 script:
-  - echo "scripts"
+  - echo "script"
   - ./mvnw clean install
