@@ -1,5 +1,5 @@
 language: java
 jdk:
-  - orcalejdk11 
+  - oraclejdk11 
 script:
   - echo "script launch"
