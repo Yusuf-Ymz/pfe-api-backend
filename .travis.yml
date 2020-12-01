@@ -9,6 +9,6 @@ before_install:
   - chmod +x mvnw
 
 install: true
+
 script:
   - echo "scripts launched"
-  - ./mvnw clean install
