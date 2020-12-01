@@ -1,3 +1,5 @@
 language: java
 jdk:
-  - orcalejdk8
+  - orcalejdk11
+deploy:
+  provider: heroku
