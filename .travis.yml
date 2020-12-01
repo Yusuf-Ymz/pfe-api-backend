@@ -1,7 +1,19 @@
 language: java
+
 jdk:
   - oraclejdk11 
-script:
-  - echo "scripts launched yy !!!!!"
+
 before_install:
   - chmod +x mvnw
+
+deploy:
+  provider: heroku
+  api-key:
+    secure: cdb8a5db-5ec9-4766-9e20-bc7fd6ab8994
+  app: pfe-api-backend
+  
+script:
+  - echo "scripts launched"
+  - ./mvnw clean install
+  - ./mvnw test
+
