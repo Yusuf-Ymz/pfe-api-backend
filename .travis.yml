@@ -1,7 +1,9 @@
+sudo: false
+
 language: java
 
 jdk:
-  - oraclejdk11 
+  - oraclejdk11
 
 before_install:
   - chmod +x mvnw
@@ -9,8 +11,7 @@ before_install:
 deploy:
   provider: heroku
   api-key:
-    secure: cdb8a5db-5ec9-4766-9e20-bc7fd6ab8994
-  app: pfe-api-backend
+    secure: "9a22e432-0bc3-46ff-b586-a98da6e45f3a"
   
 script:
   - echo "scripts launched"
