@@ -2,6 +2,6 @@ language: java
 jdk:
   - oraclejdk11 
 script:
-  - echo "script launch"
+  - echo "scripts launched !!!!!"
 before_install:
   - chmod +x mvnw
