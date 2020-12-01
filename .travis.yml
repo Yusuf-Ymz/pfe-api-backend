@@ -3,4 +3,3 @@ jdk:
   - orcalejdk11 
 script:
   - echo "script launch"
-  - ./mvnw clean install
