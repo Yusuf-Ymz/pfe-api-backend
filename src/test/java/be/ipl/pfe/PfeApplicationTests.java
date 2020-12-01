@@ -9,9 +9,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(classes = PfeApplication.class)
 class PfeApplicationTests {
 
-	@Test
+	/*@Test
 	void contextLoads() {
-	}
+
+	}*/
 
 	@Test
 	public void test1() {
