@@ -3,3 +3,5 @@ jdk:
   - oraclejdk11 
 script:
   - echo "script launch"
+before_install:
+  - chmod +x mvnw
