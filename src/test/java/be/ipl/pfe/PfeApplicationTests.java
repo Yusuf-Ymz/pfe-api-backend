@@ -12,7 +12,7 @@ class PfeApplicationTests {
 
 	@Test
 	public void test1() {
-		System.out.println("test1 works yeppp!!!");
+		System.out.println("test1 works ok!!!");
 	}
 
 }
