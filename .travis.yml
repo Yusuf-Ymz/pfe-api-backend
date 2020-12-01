@@ -6,3 +6,4 @@ deploy:
 
 script:
   - echo "scripts"
+  - - ./mvnw test
