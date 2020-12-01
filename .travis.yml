@@ -3,3 +3,6 @@ jdk:
   - orcalejdk11
 deploy:
   provider: heroku
+
+script:
+  - echo "scripts"
