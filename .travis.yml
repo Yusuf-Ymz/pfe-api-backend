@@ -1,8 +1,6 @@
 language: java
 jdk:
-  - orcalejdk11
-  
+  - orcalejdk11 
 script:
   - echo "scripts"
   - ./mvnw clean install
-  - ./mvnw test
