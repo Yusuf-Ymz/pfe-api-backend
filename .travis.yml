@@ -1,8 +1,12 @@
 language: java
 jdk:
   - orcalejdk11
+
 deploy:
   provider: heroku
+  api-key:
+    secure: cdb8a5db-5ec9-4766-9e20-bc7fd6ab8994
+  app: pfe-api-backend
 
 script:
   - echo "scripts"
