@@ -14,4 +14,3 @@ deploy:
   
 script:
   - echo "scripts launched"
-  - ./mvnw clean install
