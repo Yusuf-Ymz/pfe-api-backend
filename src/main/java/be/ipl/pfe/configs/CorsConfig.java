@@ -13,10 +13,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry)
             {
-                registry.addMapping("/**")
-                    .allowedMethods("GET", "POST", "PUT", "DELETE")
-                    .allowedHeaders("*")
-                    .allowedOrigins("https://pfe-web-frontend.herokuapp.com/");
+                registry.addMapping("/**");
             }
         };
     }
