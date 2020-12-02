@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, String> {
 
-	@Query(value = "SELECT EXISTS (SELECT * FROM doctors WHERE username = ?1)", nativeQuery = true)
-	boolean existsByUsername(String username);
+    @Query(value = "SELECT EXISTS (SELECT * FROM doctors WHERE username = ?1)", nativeQuery = true)
+    boolean existsByUsername(String username);
 
-	@Query(value = "SELECT * FROM doctors WHERE username = ?1", nativeQuery = true)
-	Doctor findByUsername(String username);
+    @Query(value = "SELECT * FROM doctors WHERE username = ?1", nativeQuery = true)
+    Doctor findByUsername(String username);
 
 }
