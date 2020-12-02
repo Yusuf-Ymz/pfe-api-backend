@@ -16,7 +16,7 @@ public class CorsConfig {
                 registry.addMapping("/**")
                     .allowedMethods("GET", "POST", "PUT", "DELETE")
                     .allowedHeaders("*")
-                    .allowedOrigins("https://pfe-web-frontend.herokuapp.com", "localhost:4200");
+                    .allowedOrigins("https://pfe-web-frontend.herokuapp.com", "http://localhost:4200");
             }
         };
     }
