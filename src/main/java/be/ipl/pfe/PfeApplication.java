@@ -8,13 +8,14 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class PfeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PfeApplication.class, args);
-	}
+    public static void main(String[] args) {
+        System.out.println(System.getenv("JDBC_DATABASE_URL"));
+        SpringApplication.run(PfeApplication.class, args);
+    }
 
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
 }
