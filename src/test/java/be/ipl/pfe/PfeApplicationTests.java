@@ -9,14 +9,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(classes = PfeApplication.class)
 class PfeApplicationTests {
 
-	/*@Test
-	void contextLoads() {
+    @Test
+    void contextLoads() {
 
-	}*/
+    }
 
-	@Test
-	public void test1() {
-		System.out.println("test1 works!!!");
-	}
+    @Test
+    public void test1() {
+        System.out.println("test1 works!!!");
+    }
 
 }
