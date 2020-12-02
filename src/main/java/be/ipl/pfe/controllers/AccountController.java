@@ -14,7 +14,7 @@ import java.util.Map;
 
 
 
-@CrossOrigin(origins = "*")
+/*@CrossOrigin(origins = "*")*/
 @RestController
 public class AccountController {
 
