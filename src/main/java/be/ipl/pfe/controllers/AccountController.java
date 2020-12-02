@@ -13,7 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@RequestMapping("/")
+
+@CrossOrigin(origins = "*")
 @RestController
 public class AccountController {
 
@@ -28,7 +29,7 @@ public class AccountController {
         response.put("account", registeredAccount);
         return response;
     }
-    @CrossOrigin(origins = "*")
+
     @PostMapping(value="/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public String login(@Valid @RequestBody  Account account){
         Account loggedAccount = this.accountService.login(account);
