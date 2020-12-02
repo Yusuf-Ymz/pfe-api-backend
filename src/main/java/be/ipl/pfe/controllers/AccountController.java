@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
-@CrossOrigin(origins = "https://pfe-web-frontend.herokuapp.com/", maxAge = 3600)
+@CrossOrigin(origins = "*")
 @RequestMapping("/")
 @RestController
 public class AccountController {
