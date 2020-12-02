@@ -12,9 +12,6 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
-/*@CrossOrigin(origins = "*")*/
 @RestController
 public class AccountController {
 
