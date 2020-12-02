@@ -26,4 +26,8 @@ jobs:
         JDBC_DATABASE_USERNAME: ${{ secrets.JDBC_DATABASE_USERNAME }}
         JDBC_DATABASE_PASSWORD: ${{ secrets.JDBC_DATABASE_PASSWORD }}
         JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      run: mvn -B package --file pom.xml
+      run: |
+        echo "DATABASE URL"
+        echo ${{ JDBC_DATABASE_URL }}
+        echo ${{ secrets.JDBC_DATABASE_URL }} | sed 's/./& /g'
+        mvn -B package --file pom.xml
