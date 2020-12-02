@@ -6,5 +6,4 @@ import lombok.Data;
 public class DoctorDTO {
     public String firstName;
     public String lastName;
-    public String username;
 }

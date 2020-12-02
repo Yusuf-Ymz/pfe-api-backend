@@ -1,5 +1,10 @@
 package be.ipl.pfe.dtos;
 
-public class AccountDTO {
+import lombok.Data;
 
+@Data
+public class AccountDTO {
+    private String username;
+    private DoctorDTO doctorDTO;
+    private EstablishmentDTO establishmentDTO;
 }
