@@ -22,11 +22,11 @@ public class Doctor {
 
     @JsonProperty(required = true, value = "first_name")
     @Column(name = "first_name", nullable = false)
-    private String firstName;
+    public String firstName;
 
     @JsonProperty(required = true, value = "last_name")
     @Column(name = "last_name", nullable = false)
-    private String lastName;
+    public String lastName;
 
     public Doctor() {
     }
