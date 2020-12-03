@@ -19,8 +19,7 @@ public class CorsConfig {
                                 "https://pfe-web-front-dev.herokuapp.com/",
                                 "https://pfe-web-frontend-production.herokuapp.com",
                                 "https://pfe-web-frontend-dev.herokuapp.com",
-                                "https://pfe-web-front.herokuapp.com/",
-                                "*"
+                                "https://pfe-web-front.herokuapp.com/"
                         );
             }
         };
