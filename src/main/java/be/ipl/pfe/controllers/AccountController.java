@@ -6,7 +6,9 @@ import be.ipl.pfe.utils.JsonUtils;
 import be.ipl.pfe.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -22,7 +24,7 @@ public class AccountController {
     public Map<String, Object> register (@Valid @RequestBody Account account) {
         Account registeredAccount = this.accountService.register(account);
         Map<String, Object> response = new HashMap<>();
-        response.put("token", JwtUtils.createJWT(account.getId(), account.getUsername()));
+        response.put("token", JwtUtils.createJWT(registeredAccount.getId(), registeredAccount.getUsername()));
         response.put("account", registeredAccount);
         return response;
     }
