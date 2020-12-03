@@ -26,5 +26,5 @@ jobs:
         JDBC_DATABASE_USERNAME: ${{ secrets.JDBC_DATABASE_USERNAME }}
         JDBC_DATABASE_PASSWORD: ${{ secrets.JDBC_DATABASE_PASSWORD }}
         JWT_SECRET: ${{ secrets.JWT_SECRET }}
-        PROFILE: prod
+        PROFILE: dev
       run: mvn -B package --file pom.xml
