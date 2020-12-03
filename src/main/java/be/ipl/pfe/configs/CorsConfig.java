@@ -17,6 +17,7 @@ public class CorsConfig {
                         .allowedHeaders("*")
                         .allowedOrigins("http://localhost:4200",
                                 "https://pfe-web-frontend-dev.herokuapp.com",
+                                "https://pfe-web-front-dev.herokuapp.com/",
                                 "https://pfe-web-frontend-production.herokuapp.com"
                         );
             }
