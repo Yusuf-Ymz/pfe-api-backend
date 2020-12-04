@@ -17,10 +17,14 @@ public class JwtUtils {
 	private static Properties props = new Properties();
 
 	static {
-		try (FileInputStream file = new FileInputStream("src/main/resources/application.properties")) {
+		String profile = System.getenv("PROFILE");
+		System.out.println(profile);
+		if (profile == null) profile = "local";
+
+		try (FileInputStream file = new FileInputStream("src/main/resources/application-" + profile + ".properties")) {
 			props.load(file);
 		} catch (IOException ioException) {
-			System.out.println("Error while reading application.properties file.");
+			System.out.println("Error while reading profile properties file.");
 			System.exit(1);
 		}
 	}
