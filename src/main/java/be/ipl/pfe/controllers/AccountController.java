@@ -11,27 +11,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 public class AccountController {
 
-    @Autowired
-    private AccountService accountService;
+	@Autowired
+	private AccountService accountService;
 
-    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String, Object> register (@Valid @RequestBody Account account) {
-        Account registeredAccount = this.accountService.register(account);
-        Map<String, Object> response = new HashMap<>();
-        response.put("token", JwtUtils.createJWT(registeredAccount.getId(), registeredAccount.getUsername()));
-        response.put("account", registeredAccount);
-        return response;
-    }
+	@PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Map<String, Object> register(@Valid @RequestBody Account account) {
+		Account registeredAccount = this.accountService.register(account);
+		String token = JwtUtils.createJWT(registeredAccount.getId(), registeredAccount.getUsername());
+		return JsonUtils.objectWithTokenToJson("account", registeredAccount, token);
+	}
 
-    @PostMapping(value="/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String login(@Valid @RequestBody  Account account){
-        Account loggedAccount = this.accountService.login(account);
-        return JsonUtils.stringToJson("token", JwtUtils.createJWT(loggedAccount.getId(), loggedAccount.getUsername()));
-    }
+	@PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Map<String, Object> login(@Valid @RequestBody Account account) {
+		Account loggedAccount = this.accountService.login(account);
+		String token = JwtUtils.createJWT(loggedAccount.getId(), loggedAccount.getUsername());
+		return JsonUtils.objectWithTokenToJson("account", loggedAccount, token);
+	}
 }
