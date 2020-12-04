@@ -21,21 +21,22 @@ public class Account {
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(referencedColumnName = "id")
-	private Establishment establishment;
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(referencedColumnName = "id")
 	private Doctor doctor;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(referencedColumnName = "id")
+	private Establishment establishment;
 
 	public Account() {}
 
 	@JsonCreator
-	public Account(String id, String username, String password) {
+	public Account(String id, String username, String password, Doctor doctor, Establishment establishment) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.doctor = doctor;
+		this.establishment = establishment;
 	}
-
 }

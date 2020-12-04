@@ -9,6 +9,7 @@ import be.ipl.pfe.ports.IdGenerator;
 import be.ipl.pfe.ports.PasswordEncoder;
 import be.ipl.pfe.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,16 +18,23 @@ public class AccountService {
 	@Autowired
 	private AccountRepository accountRepository;
 	@Autowired
+	@Qualifier("BCryptPasswordEncoder")
 	private PasswordEncoder passwordEncoder;
 	@Autowired
+	@Qualifier("UuidGenerator")
 	private IdGenerator idGenerator;
 
 	public Account register(Account account) {
 		if (account.getDoctor() == null && account.getEstablishment() == null)
-			throw new InvalidParameterException("doctor or establishment", "non-null");
+			throw new InvalidParameterException("doctor or establishment", "provided");
+		if (account.getDoctor() != null && account.getEstablishment() != null)
+			throw new InvalidParameterException("only doctor or only establishment", "provided");
 		if (this.accountRepository.existsByUsername(account.getUsername()))
 			throw new AlreadyExistsException("username");
 		account.setPassword(this.passwordEncoder.hashPassword(account.getPassword()));
+		account.setId(this.idGenerator.generate());
+		if (account.getDoctor() != null) account.getDoctor().setId(this.idGenerator.generate());
+		else account.getEstablishment().setId(this.idGenerator.generate());
 		return this.accountRepository.save(account);
 	}
 

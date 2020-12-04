@@ -16,8 +16,8 @@ public class Establishment {
 	@Id
 	private String id;
 
-	@Column(name = "name", nullable = false)
 	@JsonProperty(required = true)
+	@Column(name = "name", nullable = false)
 	private String name;
 
 	public Establishment() {}

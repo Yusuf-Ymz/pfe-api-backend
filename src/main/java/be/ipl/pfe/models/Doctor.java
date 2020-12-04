@@ -32,9 +32,4 @@ public class Doctor {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-
-	@Override
-	public String toString() {
-		return "Doctor{" + "id='" + this.id + '\'' + ", firstName='" + this.firstName + '\'' + ", lastName='" + this.lastName + '\'' + '}';
-	}
 }

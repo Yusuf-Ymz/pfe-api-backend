@@ -2,8 +2,10 @@ package be.ipl.pfe.adapters;
 
 import be.ipl.pfe.ports.PasswordEncoder;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Component;
 
-public class BCryptPasswordEncoder implements PasswordEncoder {
+@Component(value = "BCryptPasswordEncoder")
+class BCryptPasswordEncoder implements PasswordEncoder {
 
 	@Override
 	public boolean checkPassword(String plaintext, String hashed) {
