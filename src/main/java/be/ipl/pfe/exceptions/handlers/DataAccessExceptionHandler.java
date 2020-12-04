@@ -1,7 +1,7 @@
 package be.ipl.pfe.exceptions.handlers;
 
-import be.ipl.pfe.exceptions.NotFoundException;
 import be.ipl.pfe.utils.JsonUtils;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.Map;
 
 @ControllerAdvice
-public class NotFoundExceptionHandler {
+public class DataAccessExceptionHandler {
 
 	@ResponseBody
-	@ExceptionHandler(NotFoundException.class)
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	Map<String, String> notFoundExceptionHandler(NotFoundException ex) {
-		return JsonUtils.errorToJson(ex.getMessage());
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler(DataAccessException.class)
+	Map<String, String> handleDataAccessException(DataAccessException ex) {
+		return JsonUtils.errorToJson("Sorry, something went wrong! We'll take a look at the problem as soon as possible.");
 	}
-
 }
