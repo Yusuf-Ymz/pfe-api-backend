@@ -13,7 +13,7 @@ public class Location {
     private String id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "establishment_id")
+    @JoinColumn(referencedColumnName = "id")
     private Establishment establishment;
 
     @Column(name = "name")
