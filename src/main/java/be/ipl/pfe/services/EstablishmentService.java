@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EstablishmentService {
 
@@ -38,6 +40,12 @@ public class EstablishmentService {
 		this.establishmentRepository.save(location);
 		System.out.println("qr code " + this.qrCodeToInsert);
 		this.qrCodeRepository.save(this.qrCodeToInsert);
+	}
+
+	public List<Location> getLocations(String id) {
+		//Add exception ex : no establishment exist
+
+		return this.establishmentRepository.findLocationByEstablishment(id);
 	}
 
 }
