@@ -1,5 +1,6 @@
 package be.ipl.pfe.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ public class Location {
     private String id;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonProperty(required = true, access = JsonProperty.Access.WRITE_ONLY)
     @JoinColumn(referencedColumnName = "id")
     private Establishment establishment;
 

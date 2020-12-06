@@ -1,6 +1,5 @@
 package be.ipl.pfe.services;
 
-import be.ipl.pfe.exceptions.InvalidParameterException;
 import be.ipl.pfe.models.Location;
 import be.ipl.pfe.models.QRCode;
 import be.ipl.pfe.ports.IdGenerator;
@@ -29,8 +28,6 @@ public class EstablishmentService {
 	private IdGenerator idGenerator;
 
 	public void generateQRCodeLocation(Location location) {
-		if (location.getEstablishment() == null)
-			throw new InvalidParameterException("establishment", "provided");
 
 		location.setId(this.idGenerator.generate());
 		this.qrCodeToInsert.setId(this.idGenerator.generate());
