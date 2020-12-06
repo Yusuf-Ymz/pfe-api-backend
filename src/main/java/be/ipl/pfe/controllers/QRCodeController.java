@@ -29,7 +29,7 @@ public class QRCodeController {
     @Qualifier("UuidGenerator")
     private IdGenerator idGenerator;
 
-    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, String> generateQRCode(@Valid @RequestHeader("Authorization") String token) {
         String doctorId = this.authService.checkIfDoctor(token);
         String qrCodeId = this.idGenerator.generate();
