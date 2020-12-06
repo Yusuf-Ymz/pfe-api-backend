@@ -21,9 +21,9 @@ public class EstablishmentController {
 	private AuthService authService;
 
 	@PostMapping(value = "/generateQRCode", produces = MediaType.APPLICATION_JSON_VALUE)
-	public void generateQRCode(@Valid @RequestBody Location location, @RequestHeader(required = false, value = "Authorization") String token) {
+	public Location generateQRCode(@Valid @RequestBody Location location, @RequestHeader(required = false, value = "Authorization") String token) {
 		this.authService.checkIfEstablishment(token);
-		this.establishmentService.generateQRCodeLocation(location);
+		return this.establishmentService.generateQRCodeLocation(location);
 	}
 
 	@GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)

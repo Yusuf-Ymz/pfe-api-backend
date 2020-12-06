@@ -27,7 +27,7 @@ public class EstablishmentService {
 	@Qualifier("UuidGenerator")
 	private IdGenerator idGenerator;
 
-	public void generateQRCodeLocation(Location location) {
+	public Location generateQRCodeLocation(Location location) {
 		
 		location.setId(this.idGenerator.generate());
 		this.qrCodeToInsert.setId(this.idGenerator.generate());
@@ -37,6 +37,8 @@ public class EstablishmentService {
 		this.establishmentRepository.save(location);
 		System.out.println("qr code " + this.qrCodeToInsert);
 		this.qrCodeRepository.save(this.qrCodeToInsert);
+
+		return location;
 	}
 
 	public List<Location> getLocations(String id) {
