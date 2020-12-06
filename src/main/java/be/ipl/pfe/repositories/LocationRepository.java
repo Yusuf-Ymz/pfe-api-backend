@@ -7,10 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 @Repository
-public interface EstablishmentRepository extends JpaRepository<Location, String> {
+public interface LocationRepository extends JpaRepository<Location, String> {
 
     @Query(value = "SELECT * FROM locations WHERE establishment_id = ?1", nativeQuery = true)
-    List<Location> findLocationByEstablishment(String id);
+    List<Location> findLocationsByEstablishmentId(String id);
 }
