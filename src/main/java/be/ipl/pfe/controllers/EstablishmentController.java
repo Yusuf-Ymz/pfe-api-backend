@@ -23,7 +23,7 @@ public class EstablishmentController {
 	@PostMapping(value = "/generateQRCode", produces = MediaType.APPLICATION_JSON_VALUE)
 	public void generateQRCode(@Valid @RequestBody Location location) {
 		//Ajouter le fait que c'est bien un etablissement qui fait la demande
-		
+
 
 		if (location.getEstablishment() == null)
 			throw new InvalidParameterException("establishment", "provided");
