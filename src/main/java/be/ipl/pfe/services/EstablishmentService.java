@@ -28,7 +28,7 @@ public class EstablishmentService {
 	private IdGenerator idGenerator;
 
 	public void generateQRCodeLocation(Location location) {
-
+		
 		location.setId(this.idGenerator.generate());
 		this.qrCodeToInsert.setId(this.idGenerator.generate());
 		this.qrCodeToInsert.setLocation(location);

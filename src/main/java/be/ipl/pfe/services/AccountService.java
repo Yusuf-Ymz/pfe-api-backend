@@ -1,8 +1,8 @@
 package be.ipl.pfe.services;
 
 import be.ipl.pfe.exceptions.AlreadyExistsException;
+import be.ipl.pfe.exceptions.InvalidCredentialsException;
 import be.ipl.pfe.exceptions.InvalidParameterException;
-import be.ipl.pfe.exceptions.LoginException;
 import be.ipl.pfe.exceptions.NotFoundException;
 import be.ipl.pfe.models.Account;
 import be.ipl.pfe.ports.IdGenerator;
@@ -42,7 +42,7 @@ public class AccountService {
 		Account retrievedAccount = this.accountRepository.findByUsername(account.getUsername());
 		if (retrievedAccount == null) throw new NotFoundException("account", "username", account.getUsername());
 		if (!this.passwordEncoder.checkPassword(account.getPassword(), retrievedAccount.getPassword()))
-			throw new LoginException();
+			throw new InvalidCredentialsException();
 		return retrievedAccount;
 	}
 }

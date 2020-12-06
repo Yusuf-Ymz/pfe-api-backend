@@ -22,14 +22,14 @@ public class AccountController {
 	@PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Map<String, Object> register(@Valid @RequestBody Account account) {
 		Account registeredAccount = this.accountService.register(account);
-		String token = JwtUtils.createJWT(registeredAccount.getId(), registeredAccount.getUsername());
+		String token = JwtUtils.createJWT(registeredAccount.getId());
 		return JsonUtils.objectWithTokenToJson("account", registeredAccount, token);
 	}
 
 	@PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Map<String, Object> login(@Valid @RequestBody Account account) {
 		Account loggedAccount = this.accountService.login(account);
-		String token = JwtUtils.createJWT(loggedAccount.getId(), loggedAccount.getUsername());
+		String token = JwtUtils.createJWT(loggedAccount.getId());
 		return JsonUtils.objectWithTokenToJson("account", loggedAccount, token);
 	}
 }

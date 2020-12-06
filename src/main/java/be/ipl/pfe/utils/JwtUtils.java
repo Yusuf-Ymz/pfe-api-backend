@@ -1,5 +1,6 @@
 package be.ipl.pfe.utils;
 
+import be.ipl.pfe.exceptions.InvalidTokenException;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -29,20 +30,29 @@ public class JwtUtils {
 		}
 	}
 
-	public static String createJWT(String id, String username) {
+	public static String createJWT(String id) {
 		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 		Date now = new Date(System.currentTimeMillis());
 
 		byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(props.getProperty("JWT_SECRET"));
 		Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
-		JwtBuilder builder = Jwts.builder()
-		                         .setId(id)
-		                         .setIssuedAt(now)
-		                         .setIssuer(username)
-		                         .signWith(signatureAlgorithm, signingKey);
+		JwtBuilder builder = Jwts.builder().setId(id).setIssuedAt(now).signWith(signatureAlgorithm, signingKey);
 
 		return builder.compact();
+	}
+
+	public static String decodeJWT(String token) {
+		try {
+			return Jwts.parser()
+			           .setSigningKey(DatatypeConverter.parseBase64Binary(props.getProperty("JWT_SECRET")))
+			           .parseClaimsJws(token)
+			           .getBody()
+			           .getId();
+		} catch (Exception ex) {
+			throw new InvalidTokenException();
+		}
+
 	}
 
 }
