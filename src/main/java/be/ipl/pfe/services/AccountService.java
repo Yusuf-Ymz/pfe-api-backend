@@ -45,4 +45,18 @@ public class AccountService {
 			throw new InvalidCredentialsException();
 		return retrievedAccount;
 	}
+	
+	public Account update(Account account) {
+		Account getAccount = this.accountRepository.findByUsername(account.getUsername());
+		if (getAccount == null) throw new NotFoundException("account", "username", account.getUsername());
+		if(getAccount.getEstablishment() != null) {
+			getAccount.getEstablishment().setName(account.getEstablishment().getName());
+		}
+		else if(getAccount.getDoctor() != null) {
+			getAccount.getDoctor().setFirstName(account.getDoctor().getFirstName());
+			getAccount.getDoctor().setLastName(account.getDoctor().getLastName());
+		}
+		this.accountRepository.save(getAccount);
+		return getAccount;
+	}
 }

@@ -32,4 +32,11 @@ public class AccountController {
 		String token = JwtUtils.createJWT(loggedAccount.getId());
 		return JsonUtils.objectWithTokenToJson("account", loggedAccount, token);
 	}
+	
+	@PostMapping(value = "/updateAccount", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Map<String, Object> update(@Valid @RequestBody Account account) {
+		Account updatedAccount = this.accountService.update(account);
+		String token = JwtUtils.createJWT(updatedAccount.getId());
+		return JsonUtils.objectWithTokenToJson("account", updatedAccount, token);
+	}
 }
