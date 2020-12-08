@@ -32,7 +32,7 @@ public class QRCodeController {
 	public List<String> generateQRCode(@RequestBody Map<String, Integer> body, @Valid @RequestHeader("Authorization") String token) {
 		Integer amount = body.getOrDefault("amount", null);
 		if (amount == null || amount <= 0 || amount > 20)
-			throw new InvalidParameterException("amount", "non-null integer, between 1 and 20.");
+			throw new InvalidParameterException("Amount", "a number between 1 and 20.");
 		String doctorId = this.authService.checkIfDoctor(token);
 		List<String> hashes = new ArrayList<>();
 		for (int i = 0; i < amount; i++) {
