@@ -56,8 +56,10 @@ public class AuthService {
     }
 
     //TODO revoir si token ou serial number
-    public void checkIfCitizen(String citizenId) {
+    public String checkIfCitizen(String token) {
+        String citizenId = JwtUtils.decodeJWT(token);
         this.citizenRepository.findById(citizenId).orElseThrow(InvalidTokenException::new);
+        return citizenId;
     }
 
 }

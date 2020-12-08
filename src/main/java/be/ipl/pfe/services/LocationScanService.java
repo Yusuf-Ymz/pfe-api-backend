@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class LocationScanService {
     @Autowired
@@ -18,6 +20,7 @@ public class LocationScanService {
 
     public LocationScan createLocationScan(LocationScan locationScan) {
         locationScan.setId(this.idGenerator.generate());
+        locationScan.setVisitDateTime(LocalDateTime.now());
         return this.locationScanRepository.save(locationScan);
     }
 }

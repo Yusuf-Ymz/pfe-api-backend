@@ -13,41 +13,42 @@ import java.util.Map;
 @RestController
 @RequestMapping("/citizens/scans")
 public class ScanController {
-	@Autowired
-	private DoctorScanService doctorScanService;
+    @Autowired
+    private DoctorScanService doctorScanService;
 
-	@Autowired
-	private LocationScanService locationScanService;
+    @Autowired
+    private LocationScanService locationScanService;
 
-	@Autowired
-	private AuthService authService;
+    @Autowired
+    private AuthService authService;
 
-	@Autowired
-	private DoctorService doctorService;
+    @Autowired
+    private DoctorService doctorService;
 
-	@Autowired
-	private LocationService locationService;
+    @Autowired
+    private LocationService locationService;
 
-	@Autowired
-	private CitizenService citizenService;
+    @Autowired
+    private CitizenService citizenService;
 
-	@GetMapping(value = "/doctor", produces = MediaType.APPLICATION_JSON_VALUE)
-	public DoctorScan create(@RequestBody Map<String, String> body, @RequestHeader("Authorization") String token) {
-		this.authService.checkIfCitizen(token);
-		String qrCodeContentToken = body.getOrDefault("hash", null);
-		Claims claims = JwtUtils.decodeQRCodeContentToken(qrCodeContentToken);
-		String doctorId = claims.getId();
-		String qrCodeContent = claims.getSubject();
-		Doctor doctor = this.doctorService.getDoctorById(doctorId);
-		Citizen citizen = this.citizenService.getCitizenById(doctorId);
-		return this.doctorScanService.createScan(new DoctorScan(qrCodeContent, doctor, citizen));
-	}
+    @PostMapping(value = "/doctor", produces = MediaType.APPLICATION_JSON_VALUE)
+    public DoctorScan createDoctorScan(@RequestBody Map<String, String> body, @RequestHeader("Authorization") String token) {
+        String citizenId = this.authService.checkIfCitizen(token);
+        String qrCodeContentToken = body.getOrDefault("hash", null);
+        Claims claims = JwtUtils.decodeQRCodeContentToken(qrCodeContentToken);
+        String doctorId = claims.getId();
+        String qrCodeContent = claims.getSubject();
+        Doctor doctor = this.doctorService.getDoctorById(doctorId);
+        Citizen citizen = this.citizenService.getCitizenById(citizenId);
+        return this.doctorScanService.createScan(new DoctorScan(qrCodeContent, doctor, citizen));
+    }
 
-	@PostMapping(value = "/location", produces = MediaType.APPLICATION_JSON_VALUE)
-	public LocationScan create(@RequestBody Location location, @RequestHeader("Authorization") String token) {
-		this.authService.checkIfCitizen(token);
-		Location retrievedLocation = this.locationService.getLocationById(location.getId());
-		Citizen citizen = this.citizenService.getCitizenById(token);
-		return this.locationScanService.createLocationScan(new LocationScan(retrievedLocation, citizen));
-	}
+    @PostMapping(value = "/location", produces = MediaType.APPLICATION_JSON_VALUE)
+    public LocationScan createLocationScan(@RequestBody Map<String, String> body, @RequestHeader("Authorization") String token) {
+        String citizenId = this.authService.checkIfCitizen(token);
+        String locationId = body.getOrDefault("id", null);
+        Location retrievedLocation = this.locationService.getLocationById(locationId);
+        Citizen citizen = this.citizenService.getCitizenById(citizenId);
+        return this.locationScanService.createLocationScan(new LocationScan(retrievedLocation, citizen));
+    }
 }

@@ -13,10 +13,11 @@ import java.util.Map;
 @ControllerAdvice
 public class DataAccessExceptionHandler {
 
-	@ResponseBody
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	@ExceptionHandler(DataAccessException.class)
-	Map<String, String> handleDataAccessException(DataAccessException ex) {
-		return JsonUtils.errorToJson("Sorry, something went wrong! We'll take a look at the problem as soon as possible.");
-	}
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(DataAccessException.class)
+    Map<String, String> handleDataAccessException(DataAccessException ex) {
+        ex.printStackTrace();
+        return JsonUtils.errorToJson("Sorry, something went wrong! We'll take a look at the problem as soon as possible.");
+    }
 }

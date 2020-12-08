@@ -19,4 +19,9 @@ public class Citizen {
 
     @Column(name = "last_name")
     private String lastName;
+
+    public Citizen() {
+
+    }
+
 }

@@ -23,7 +23,6 @@ public class DoctorScanService {
         if (this.doctorScanRepository.existsById(doctorScan.getDoctorQRCode()))
             throw new AlreadyExistsException(doctorScan.getDoctorQRCode());
         //TODO send notifications
-        doctorScan.setDoctorQRCode(this.idGenerator.generate());
         return this.doctorScanRepository.save(doctorScan);
     }
 }
