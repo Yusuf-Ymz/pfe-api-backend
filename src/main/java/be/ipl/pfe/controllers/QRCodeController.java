@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/doctors/qrcodes")
 @RestController
@@ -27,7 +28,8 @@ public class QRCodeController {
 	private IdGenerator idGenerator;
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<String> generateQRCode(@RequestParam(value = "amount") Integer amount, @Valid @RequestHeader("Authorization") String token) {
+	public List<String> generateQRCode(@RequestBody Map<String, Integer> body, @Valid @RequestHeader("Authorization") String token) {
+		Integer amount = body.getOrDefault("amount", null);
 		if (amount == null || amount <= 0 || amount > 20)
 			throw new InvalidParameterException("amount", "non-null integer, between 1 and 20.");
 		String doctorId = this.authService.checkIfDoctor(token);
