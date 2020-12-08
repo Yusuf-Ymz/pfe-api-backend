@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +34,11 @@ public class QRCodeController {
 		if (amount == null || amount <= 0 || amount > 20)
 			throw new InvalidParameterException("amount", "non-null integer, between 1 and 20.");
 		String doctorId = this.authService.checkIfDoctor(token);
-		String qrCodeId = this.idGenerator.generate();
-		return this.qrCodeService.generate(amount, doctorId, qrCodeId);
+		List<String> hashes = new ArrayList<>();
+		for (int i = 0; i < amount; i++) {
+			hashes.add(this.qrCodeService.generate(doctorId, this.idGenerator.generate()));
+		}
+		return hashes;
 	}
 
 }
