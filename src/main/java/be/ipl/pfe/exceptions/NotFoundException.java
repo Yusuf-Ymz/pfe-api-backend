@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class NotFoundException extends RuntimeException {
 
 	public NotFoundException(String resource, String parameter, String value) {
-		super(resource + " with value " + value + " for " + parameter + " was not found");
+		super(resource + " avec pour valeur " + value + " pour " + parameter + " n'existe pas.");
 	}
 }

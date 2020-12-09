@@ -17,32 +17,31 @@ import java.util.List;
 @Service
 public class NotificationService {
 
-    private final FirebaseMessaging firebaseMessaging;
+	private final FirebaseMessaging firebaseMessaging;
 
-    public NotificationService() throws IOException {
-        GoogleCredentials googleCredentials = GoogleCredentials
-                .fromStream(new ClassPathResource("firebase-service-account.json").getInputStream());
-        FirebaseOptions firebaseOptions = FirebaseOptions
-                .builder()
-                .setCredentials(googleCredentials)
-                .build();
-        FirebaseApp app = FirebaseApp.initializeApp(firebaseOptions);
-        this.firebaseMessaging = FirebaseMessaging.getInstance(app);
+	public NotificationService() throws IOException {
+		GoogleCredentials googleCredentials = GoogleCredentials.fromStream(new ClassPathResource("firebase-service-account.json")
+				.getInputStream());
+		FirebaseOptions firebaseOptions = FirebaseOptions.builder().setCredentials(googleCredentials).build();
+		FirebaseApp app = FirebaseApp.initializeApp(firebaseOptions);
+		this.firebaseMessaging = FirebaseMessaging.getInstance(app);
 
-    }
+	}
 
+	void sendNotifications(Note note, List<String> tokens) {
+		Notification notification = Notification.builder()
+		                                        .setTitle(note.getSubject())
+		                                        .setBody(note.getContent())
+		                                        .build();
 
-    public void sendNotifications(Note note, List<String> tokens) {
-        Notification notification = Notification
-                .builder()
-                .setTitle(note.getSubject())
-                .setBody(note.getContent())
-                .build();
-
-        MulticastMessage multicastMessage = MulticastMessage.builder().addAllTokens(tokens).setNotification(notification).build();
-        try {
-            this.firebaseMessaging.sendMulticast(multicastMessage);
-        } catch (FirebaseMessagingException e) {
-        }
-    }
+		MulticastMessage multicastMessage = MulticastMessage.builder()
+		                                                    .addAllTokens(tokens)
+		                                                    .setNotification(notification)
+		                                                    .build();
+		try {
+			this.firebaseMessaging.sendMulticast(multicastMessage);
+		} catch (FirebaseMessagingException e) {
+			// do nothing
+		}
+	}
 }

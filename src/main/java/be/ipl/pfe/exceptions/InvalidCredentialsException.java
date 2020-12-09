@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class InvalidCredentialsException extends RuntimeException {
 
 	public InvalidCredentialsException() {
-		super("Invalid credentials.");
+		super("Pseudo ou mot de passe incorrect.");
 	}
 }

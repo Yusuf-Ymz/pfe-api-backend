@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class InvalidParameterException extends RuntimeException {
 
 	public InvalidParameterException(String parameter, String shouldBe) {
-		super(parameter + " is invalid, should be " + shouldBe);
+		super(parameter + " n'est pas valide, il devrait être " + shouldBe);
 	}
 }

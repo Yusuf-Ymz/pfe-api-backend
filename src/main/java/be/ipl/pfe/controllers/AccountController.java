@@ -2,14 +2,12 @@ package be.ipl.pfe.controllers;
 
 import be.ipl.pfe.models.Account;
 import be.ipl.pfe.services.AccountService;
-import be.ipl.pfe.services.AuthService;
 import be.ipl.pfe.utils.JsonUtils;
 import be.ipl.pfe.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -34,10 +32,9 @@ public class AccountController {
 		String token = JwtUtils.createJWT(loggedAccount.getId());
 		return JsonUtils.objectWithTokenToJson("account", loggedAccount, token);
 	}
-	
+
 	@PostMapping(value = "/updateAccount", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Account update(@Valid @RequestBody Account account) {
-		Account updatedAccount = this.accountService.update(account);
-		return updatedAccount;
+		return this.accountService.update(account);
 	}
 }
