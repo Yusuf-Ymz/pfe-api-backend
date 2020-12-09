@@ -25,7 +25,7 @@ public class Citizen {
     private String lastName;
 
     @JsonProperty(required = true, value = "notification_token")
-    @Column(name = "notification_token")
+    @Column(name = "notification_token", nullable = false)
     private String notificationToken;
 
     public Citizen() {
