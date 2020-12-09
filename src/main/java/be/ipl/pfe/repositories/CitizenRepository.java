@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CitizenRepository extends JpaRepository<Citizen, String> {
@@ -16,4 +17,6 @@ public interface CitizenRepository extends JpaRepository<Citizen, String> {
             "AND c2.id<>c1.id AND l2.citizen_id=c2.id AND l2.location_id=l1.location_id " +
             "AND l2.visit_date_time BETWEEN l1.visit_date_time AND l1.visit_date_time + INTERVAL '1 HOUR' ", nativeQuery = true)
     List<String> getPotentialInfectedCitizens(String citizenId);
+
+    Optional<Citizen> findByNotificationToken(String notificationToken);
 }

@@ -4,13 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "citizens")
+@Table(name = "citizens", uniqueConstraints = {@UniqueConstraint(columnNames = {"notification_token"})})
 @Data
 public class Citizen {
     @Id

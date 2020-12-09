@@ -25,4 +25,8 @@ public class CitizenService {
         citizen.setId(this.idGenerator.generate());
         return this.citizenRepository.save(citizen);
     }
+
+    public Citizen getCitizenByNotificationToken(String notificationToken) {
+        return this.citizenRepository.findByNotificationToken(notificationToken).orElse(null);
+    }
 }
