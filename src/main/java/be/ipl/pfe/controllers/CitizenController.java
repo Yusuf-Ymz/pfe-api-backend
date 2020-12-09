@@ -23,6 +23,7 @@ public class CitizenController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, String> createCitizen(@Valid @RequestBody Citizen citizen) {
+        System.out.println(citizen);
         Citizen createdCitizen = this.citizenService.createCitizen(citizen);
         return JsonUtils.stringToJson("token", JwtUtils.createJWT(createdCitizen.getId()));
     }
