@@ -20,6 +20,9 @@ public class Citizen {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "notification_token")
+    private String notificationToken;
+
     public Citizen() {
 
     }
