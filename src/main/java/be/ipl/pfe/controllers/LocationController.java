@@ -13,21 +13,21 @@ import java.util.List;
 @RequestMapping("/establishments/locations")
 @RestController
 public class LocationController {
-    @Autowired
-    private LocationService locationService;
+	@Autowired
+	private LocationService locationService;
 
-    @Autowired
-    private AuthService authService;
+	@Autowired
+	private AuthService authService;
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public void create(@Valid @RequestBody Location location, @RequestHeader(required = false, value = "Authorization") String token) {
-        this.authService.checkIfEstablishment(token);
-        this.locationService.createLocation(location);
-    }
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public Location create(@Valid @RequestBody Location location, @RequestHeader(required = false, value = "Authorization") String token) {
+		this.authService.checkIfEstablishment(token);
+		return this.locationService.createLocation(location);
+	}
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Location> getAll(@RequestHeader(required = false, value = "Authorization") String token) {
-        String id = this.authService.checkIfEstablishment(token);
-        return this.locationService.getEstablishmentLocations(id);
-    }
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Location> getAll(@RequestHeader(required = false, value = "Authorization") String token) {
+		String id = this.authService.checkIfEstablishment(token);
+		return this.locationService.getEstablishmentLocations(id);
+	}
 }

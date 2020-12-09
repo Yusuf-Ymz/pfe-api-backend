@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class AlreadyExistsException extends RuntimeException {
 
 	public AlreadyExistsException(String value) {
-		super(value + " must be unique");
+		super(value + " doit être unique.");
 	}
 }
