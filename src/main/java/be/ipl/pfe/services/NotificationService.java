@@ -37,6 +37,7 @@ public class NotificationService {
                 .builder()
                 .setTitle(note.getSubject())
                 .setBody(note.getContent())
+                .setImage(note.getImage())
                 .build();
 
         MulticastMessage multicastMessage = MulticastMessage.builder().addAllTokens(tokens).setNotification(notification).build();
