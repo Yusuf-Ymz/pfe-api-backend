@@ -34,8 +34,10 @@ public class DoctorScanService {
             throw new AlreadyExistsException(doctorScan.getDoctorQRCode());
         //TODO send notifications
         List<String> tokens = this.citizenRepository.getPotentialInfectedCitizens(doctorScan.getCitizen().getId());
-        Note note = new Note("Notification", "Vous avez été en contact avec une personne infectée dans les 10 derniers jours, veuillez consulter un médecin");
-        this.notificationService.sendNotifications(note, tokens);
+        if (tokens.size() > 0) {
+            Note note = new Note("Notification", "Vous avez été en contact avec une personne infectée dans les 10 derniers jours, veuillez consulter un médecin");
+            this.notificationService.sendNotifications(note, tokens);
+        }
         return this.doctorScanRepository.save(doctorScan);
     }
 
