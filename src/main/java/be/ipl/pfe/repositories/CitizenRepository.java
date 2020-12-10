@@ -15,7 +15,7 @@ public interface CitizenRepository extends JpaRepository<Citizen, String> {
             "FROM citizens c1, citizens c2, locations_scans l1, locations_scans l2 " +
             "WHERE c1.id=?1 AND c1.id=l1.citizen_id AND l1.visit_date_time BETWEEN NOW() - INTERVAL '10 DAY' AND NOW() " +
             "AND c2.id<>c1.id AND l2.citizen_id=c2.id AND l2.location_id=l1.location_id " +
-            "AND l2.visit_date_time BETWEEN l1.visit_date_time AND l1.visit_date_time + INTERVAL '1 HOUR' ", nativeQuery = true)
+            "AND (l2.visit_date_time BETWEEN l1.visit_date_time AND l1.visit_date_time + INTERVAL '1 HOUR' OR l2.visit_date_time BETWEEN l1.visit_date_time - INTERVAL '1 HOUR' AND l1.visit_date_time) ", nativeQuery = true)
     List<String> getPotentialInfectedCitizens(String citizenId);
 
     Optional<Citizen> findByNotificationToken(String notificationToken);
